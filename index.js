@@ -3,6 +3,7 @@ const express = require('express')
 const createError = require('http-errors')
 const app = express()
 const cors = require('cors')
+const morgan = require('morgan')
 const ProductRouter = require('./src/routes/products')
 const CategoryRouter = require('./src/routes/category')
 // const commonMiddle = require('./src/middlewares/common')
@@ -12,6 +13,7 @@ const DB_HOST = process.env.DB_HOST
 
 app.use(express.json())
 app.use(cors())
+app.use(morgan('dev'))
 app.use('/products', ProductRouter)
 app.use('/category', CategoryRouter)
 app.all('*', (req, res, next) => {
