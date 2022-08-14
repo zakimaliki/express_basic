@@ -11,6 +11,8 @@
 | [Http-errors] | npm i http-errors |
 | [bcrypt.js] | npm i bcryptjs |
 | [uuid] | npm i uuid |
+
+
 [express]: <http://expressjs.com>
 [Nodemon]: <https://www.npmjs.com/package/nodemon>
 [Morgan]: <https://www.npmjs.com/package/morgan>
@@ -19,7 +21,9 @@
 [CORS]: <https://www.npmjs.com/package/cors>
 [Eslint]: <https://eslint.org>
 [Http-errors]: <https://www.npmjs.com/package/http-errors>
+[bcrypt.js]: <https://www.npmjs.com/package/bcryptjs>
 [uuid]: <https://www.npmjs.com/package/uuid>
+
 
 ## installation
 
