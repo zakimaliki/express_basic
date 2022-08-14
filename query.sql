@@ -31,10 +31,10 @@ CREATE TABLE payment(
 );
 
 CREATE TABLE users(
-    id SERIAL PRIMARY KEY,
-    fullname VARCHAR,
+    id VARCHAR PRIMARY KEY,
     email VARCHAR NOT NULL,
-    password VARCHAR NOT NULL
+    password VARCHAR NOT NULL,
+    fullname VARCHAR
 );
 
 DROP TABLE product CASCADE;
@@ -48,9 +48,11 @@ FROM product
 INNER JOIN category
 ON product.category_id = category.id;
 
-INSERT INTO category(id,name) VALUES(1,’kursi’);
+INSERT INTO category(id,name) VALUES(1,'kursi');
 
-INSERT INTO category(name) VALUES(’kursi’);
+INSERT INTO users(id, email,password,fullname) VALUES(1,'maiki@zaki.com','123456','zakimaiki');
+
+INSERT INTO category(name) VALUES('kursi');
 
 UPDATE category SET name ='furniture' WHERE id=1;
 

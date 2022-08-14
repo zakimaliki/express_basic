@@ -1,4 +1,3 @@
-const pool = require('../config/db')
 const Pool = require('../config/db')
 const selectAll = ({limit,offset,sort,sortby}) => {
   return Pool.query(`SELECT * FROM category ORDER BY ${sortby} ${sort} LIMIT ${limit} OFFSET ${offset}`)
@@ -12,12 +11,24 @@ const insert = (id, name) => {
 const update = (id, name) => {
   return Pool.query(`UPDATE category SET name='${name}' WHERE id='${id}'`)
 }
-const deleteCategory = (id) => {
+const deleteData = (id) => {
   return Pool.query(`DELETE FROM category WHERE id=${id}`)
 }
 
-const countCategory = () =>{
+const countData = () =>{
   return Pool.query('SELECT COUNT(*) FROM category')
+}
+
+const findId =(id)=>{
+  return  new Promise ((resolve,reject)=> 
+  Pool.query(`SELECT id FROM category WHERE id=${id}`,(error,result)=>{
+    if(!error){
+      resolve(result)
+    }else{
+      reject(error)
+    }
+  })
+  )
 }
 
 module.exports = {
@@ -25,6 +36,7 @@ module.exports = {
   select,
   insert,
   update,
-  deleteCategory,
-  countCategory
+  deleteData,
+  countData,
+  findId
 }

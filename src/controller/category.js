@@ -1,5 +1,5 @@
 const createError = require('http-errors')
-const categoryModel = require('../models/category')
+const {selectAll,select,countData,findId,insert,update,deleteData} = require('../models/category')
 const commonHelper = require('../helper/common')
 const categoryController = {  
 
@@ -10,9 +10,8 @@ const categoryController = {
       const offset = (page - 1) * limit
       const sortby = req.query.sortby || name
       const sort = req.query.sort.toUpperCase() || "ASC"
-      console.log(sort);
-      const result = await categoryModel.selectAll({limit,offset,sort,sortby})
-      const {rows: [count]} = await categoryModel.countCategory()
+      const result = await selectAll({limit,offset,sort,sortby})
+      const {rows: [count]} = await countData()
       const totalData = parseInt(count.count)
       const totalPage = Math.ceil(totalData/limit)
       const pagination ={     
@@ -28,40 +27,59 @@ const categoryController = {
   },
   getCategory: (req, res, next) => {
     const id = Number(req.params.id)
-    categoryModel.select(id)
+    select(id)
       .then(
         result => commonHelper.response(res, result.rows, 200, "get data success")
       )
       .catch(err => res.send(err)
       )
   },
-  insertCategory: (req, res, next) => {
-    const { id, name } = req.body
-    categoryModel.insert(id, name)
+  insertCategory: async(req, res, next) => {
+    const { name } = req.body
+    const {rows: [count]} = await countData()
+    const id = Number(count.count)+1;
+    insert(id, name)
       .then(
         result => commonHelper.response(res, result.rows, 201, "Category created")
       )
       .catch(err => res.send(err)
       )
   },
-  updateCategory: (req, res, next) => {
-    const id = Number(req.params.id)
-    const name = req.body.name
-    categoryModel.update(id, name)
-      .then(
-        result => commonHelper.response(res, result.rows, 200, "Category updated")
-      )
-      .catch(err => res.send(err)
-      )
+  updateCategory: async(req, res,next) => {
+    try{
+      const id = Number(req.params.id)
+      const name = req.body.name
+      const {rowCount} = await findId(id)
+      if(!rowCount){
+        return next(createError(403,"ID is Not Found"))
+      }
+      update(id, name)
+        .then(
+          result => commonHelper.response(res, result.rows, 200, "Category updated")
+          )
+          .catch(err => res.send(err)
+          )
+        }catch(error){
+          console.log(error);
+        }
   },
-  deleteCategory: (req, res, next) => {
-    const id = Number(req.params.id)
-    categoryModel.deleteCategory(id)
-      .then(
-        result => commonHelper.response(res, result.rows, 200, "Category deleted")
-      )
-      .catch(err => res.send(err)
-      )
+  deleteCategory: async(req, res, next) => {
+    try{
+      const id = Number(req.params.id)
+      const {rowCount} = await findId(id)
+      if(!rowCount){
+        return next(createError(403,"ID is Not Found"))
+      }
+      deleteData(id)
+        .then(
+          result => commonHelper.response(res, result.rows, 200, "Category deleted")
+        )
+        .catch(err => res.send(err)
+        )
+    }catch(error){
+        console.log(error);
+    }
+
   }
 }
 
