@@ -5,9 +5,12 @@ CREATE TABLE product(
     name VARCHAR NOT NULL,
     stock INT NOT NULL,
     price INT NOT NULL,
+    photo VARCHAR NOT NULL,
+    description VARCHAR NOT NULL,
     category_id INT REFERENCES category (id),
     transaksi_id INT REFERENCES transaksi (id)
 );
+
 CREATE TABLE category(
     id SERIAL PRIMARY KEY,
     name VARCHAR NOT NULL
@@ -60,3 +63,5 @@ UPDATE category SET name ='furniture' WHERE id=1;
 DELETE FROM category WHERE id=1;
 
 ALTER TABLE users ADD role VARCHAR;
+
+ALTER TABLE product ADD description VARCHAR(255) AFTER price;
