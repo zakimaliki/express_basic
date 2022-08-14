@@ -9,9 +9,8 @@
 | [CORS] | npm i cors |
 | [Eslint] | npm i eslint |
 | [Http-errors] | npm i http-errors |
-| [bcrypt.js] | npm i bcryptjs |
-| [uuid] | npm i uuid |
-
+| [Bcrypt.js] | npm i bcryptjs |
+| [Uuid] | npm i uuid |
 
 [express]: <http://expressjs.com>
 [Nodemon]: <https://www.npmjs.com/package/nodemon>
@@ -21,15 +20,13 @@
 [CORS]: <https://www.npmjs.com/package/cors>
 [Eslint]: <https://eslint.org>
 [Http-errors]: <https://www.npmjs.com/package/http-errors>
-[bcrypt.js]: <https://www.npmjs.com/package/bcryptjs>
-[uuid]: <https://www.npmjs.com/package/uuid>
-
-
-## installation
+[Bcrypt.js]: <https://www.npmjs.com/package/bcryptjs>
+[Uuid]: <https://www.npmjs.com/package/uuid>
+## Installation
 
 - npm install
 - npm run dev or npm run server
 
-## debug
+## Debug
 
 - npm run lint
