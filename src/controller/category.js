@@ -1,5 +1,7 @@
+const createError = require('http-errors')
 const categoryModel = require('../models/category')
-const categoryController = {
+const commonHelper = require('../helper/common')
+const categoryController = {  
 
   getAllCategory: async(req, res, next) => {
     try{
@@ -13,16 +15,13 @@ const categoryController = {
       const {rows: [count]} = await categoryModel.countCategory()
       const totalData = parseInt(count.count)
       const totalPage = Math.ceil(totalData/limit)
-      console.log(result);
-      res.status(200).json({
-        pagination:{
-          currentPage : page,
-          limit:limit,
-          totalData:totalData,
-          totalPage:totalPage
-        },
-        data:result.rows
-      })
+      const pagination ={     
+            currentPage : page,
+            limit:limit,
+            totalData:totalData,
+            totalPage:totalPage
+          }
+      commonHelper.response(res, result.rows, 200, "get data success",pagination)
     }catch(error){
       console.log(error);
     }
@@ -31,7 +30,7 @@ const categoryController = {
     const id = Number(req.params.id)
     categoryModel.select(id)
       .then(
-        result => res.json(result.rows)
+        result => commonHelper.response(res, result.rows, 200, "get data success")
       )
       .catch(err => res.send(err)
       )
@@ -40,7 +39,7 @@ const categoryController = {
     const { id, name } = req.body
     categoryModel.insert(id, name)
       .then(
-        result => res.json('Product created')
+        result => commonHelper.response(res, result.rows, 201, "Category created")
       )
       .catch(err => res.send(err)
       )
@@ -50,7 +49,7 @@ const categoryController = {
     const name = req.body.name
     categoryModel.update(id, name)
       .then(
-        result => res.json('Product updated')
+        result => commonHelper.response(res, result.rows, 200, "Category updated")
       )
       .catch(err => res.send(err)
       )
@@ -59,7 +58,7 @@ const categoryController = {
     const id = Number(req.params.id)
     categoryModel.deleteCategory(id)
       .then(
-        result => res.json('Product deleted')
+        result => commonHelper.response(res, result.rows, 200, "Category deleted")
       )
       .catch(err => res.send(err)
       )
