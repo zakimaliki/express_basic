@@ -22,7 +22,7 @@ router
   .get('/',protect, getAllProduct)
   .get('/:id',protect, getProduct)
   .post('/',protect,upload.single('photo'), insertProduct)
-  .put('/:id',protect, updateProduct)
+  .put('/:id',protect,upload.single('photo'), updateProduct)
   .delete('/:id',protect, deleteProduct)
 
 module.exports = router

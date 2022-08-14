@@ -6,9 +6,7 @@ CREATE TABLE product(
     stock INT NOT NULL,
     price INT NOT NULL,
     photo VARCHAR NOT NULL,
-    description VARCHAR NOT NULL,
-    category_id INT REFERENCES category (id),
-    transaksi_id INT REFERENCES transaksi (id)
+    description VARCHAR NOT NULL
 );
 
 CREATE TABLE category(
@@ -55,6 +53,7 @@ ON product.category_id = category.id;
 INSERT INTO category(id,name) VALUES(1,'kursi');
 
 INSERT INTO users(id, email,password,fullname) VALUES(1,'maiki@zaki.com','123456','zakimaiki');
+INSERT INTO product(id,name,stock,price,photo,description) VALUES(1,'baju',10,20000,'aaa','baru');
 
 INSERT INTO category(name) VALUES('kursi');
 

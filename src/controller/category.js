@@ -79,7 +79,6 @@ const categoryController = {
     }catch(error){
         console.log(error);
     }
-
   }
 }
 
