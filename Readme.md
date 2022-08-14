@@ -11,6 +11,7 @@
 | [Http-errors] | npm i http-errors |
 | [Bcrypt.js] | npm i bcryptjs |
 | [Uuid] | npm i uuid |
+| [Jsonwebtoken] | npm i jsonwebtoken |
 
 [express]: <http://expressjs.com>
 [Nodemon]: <https://www.npmjs.com/package/nodemon>
@@ -22,6 +23,8 @@
 [Http-errors]: <https://www.npmjs.com/package/http-errors>
 [Bcrypt.js]: <https://www.npmjs.com/package/bcryptjs>
 [Uuid]: <https://www.npmjs.com/package/uuid>
+[Jsonwebtoken]: <https://www.npmjs.com/package/jsonwebtoken>
+
 ## Installation
 
 - npm install

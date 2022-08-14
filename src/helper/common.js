@@ -4,7 +4,7 @@ const response = (res, result,status, message,pagination)=>{
     resultPrint.statusCode = status
     resultPrint.data = result
     resultPrint.message = message || null
-    resultPrint.pagination = pagination || null
+    resultPrint.pagination = pagination || {}
     res.status(status).json(resultPrint)
 }
 

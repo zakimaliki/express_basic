@@ -1,7 +1,7 @@
 const Pool = require('../config/db')
 const findEmail = (email) =>{
     return  new Promise ((resolve,reject)=> 
-    Pool.query(`SELECT email FROM users WHERE email='${email}'`,(error,result)=>{
+    Pool.query(`SELECT * FROM users WHERE email='${email}'`,(error,result)=>{
       if(!error){
         resolve(result)
       }else{

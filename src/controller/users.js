@@ -1,8 +1,10 @@
 const { v4: uuidv4 } = require('uuid');
 const bcrypt = require('bcryptjs');
 const createError = require('http-errors')
+// const jwt = require('jsonwebtoken')
 const {findEmail,create} = require('../models/users')
-const commonHelper = require('../helper/common')
+const commonHelper = require('../helper/common');
+const authHelper = require('../helper/auth')
 
 const UserController ={
  register : async(req,res,next)=>{
@@ -27,6 +29,30 @@ const UserController ={
       )
       .catch(err => res.send(err)
       )
+    }catch(error){
+      console.log(error);
+    }
+  },
+login :async(req,res,next)=>{
+    try{
+      const {email,password} = req.body
+      const {rows : [user]} = await findEmail(email)
+        if(!user){
+          return commonHelper.response(res,null,403,'Email is invalid')
+        }
+        const isValidPassword = bcrypt.compareSync(password,user.password)
+        console.log(isValidPassword);
+    
+        if(!isValidPassword){
+          return commonHelper.response(res,null,403,'Password is invalid')
+        }
+        delete user.password
+        const payload = {
+          data: user.email,
+          role : '1'
+        }
+        user.token = authHelper.generateToken(payload)
+        commonHelper.response(res,user,201,'login is successful')
     }catch(error){
       console.log(error);
     }
