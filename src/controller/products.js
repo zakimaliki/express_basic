@@ -36,6 +36,8 @@ const productController = {
       )
   },
   insertProduct: async(req, res) => {
+    const PORT = process.env.PORT || 5000
+    const DB_HOST = process.env.DB_HOST || 'localhost'
     const photo = req.file.filename;
     const { name,stock,price,description } = req.body
     const {rows: [count]} = await countData()
@@ -46,7 +48,7 @@ const productController = {
       name,
       stock,
       price,
-      photo,
+      photo:`http://${DB_HOST}:${PORT}/img/${photo}`,
       description
     }
     insert(data)
@@ -58,6 +60,8 @@ const productController = {
   },
   updateProduct: async(req, res) => {
     try{
+      const PORT = process.env.PORT || 5000
+      const DB_HOST = process.env.DB_HOST || 'localhost'
       const id = Number(req.params.id)
       const photo = req.file.filename;
       const { name,stock,price,description } = req.body
@@ -70,7 +74,7 @@ const productController = {
         name,
         stock,
         price,
-        photo,
+        photo:`http://${DB_HOST}:${PORT}/img/${photo}`,
         description
       }
       update(data)
@@ -99,13 +103,6 @@ const productController = {
     }catch(error){
         console.log(error);
     }
-    // const id = Number(req.params.id)
-    // const index = products.findIndex(product => product.id === id)
-    // if (index === -1) {
-    //   next(new createError.NotFound())
-    // }
-    // products.splice(index, 1)
-    // res.status(200).json('Product deleted')
   }
 }
 
