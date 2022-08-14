@@ -12,6 +12,8 @@
 | [Bcrypt.js] | npm i bcryptjs |
 | [Uuid] | npm i uuid |
 | [Jsonwebtoken] | npm i jsonwebtoken |
+| [Multer] | npm i multer |
+
 
 [express]: <http://expressjs.com>
 [Nodemon]: <https://www.npmjs.com/package/nodemon>
@@ -24,6 +26,7 @@
 [Bcrypt.js]: <https://www.npmjs.com/package/bcryptjs>
 [Uuid]: <https://www.npmjs.com/package/uuid>
 [Jsonwebtoken]: <https://www.npmjs.com/package/jsonwebtoken>
+[Multer]: <https://www.npmjs.com/package/multer>
 
 ## Installation
 

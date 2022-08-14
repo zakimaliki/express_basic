@@ -27,6 +27,8 @@ const productController = {
     res.json(products)
   },
   insertProduct: (req, res) => {
+    const file = req.file;
+    console.log(file);
     const { name, price, stock } = req.body
     const newProduct = {
       id: products.length + 1,
