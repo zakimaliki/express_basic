@@ -26,7 +26,7 @@ const productController = {
     console.log(res.status)
     res.json(products)
   },
-  insert: (req, res) => {
+  insertProduct: (req, res) => {
     const { name, price, stock } = req.body
     const newProduct = {
       id: products.length + 1,
@@ -37,7 +37,7 @@ const productController = {
     products.push(newProduct)
     res.status(201).json('Product created')
   },
-  update: (req, res) => {
+  updateProduct: (req, res) => {
     const id = Number(req.params.id)
     const index = products.findIndex(product => product.id === id)
     if (index === -1) {
@@ -53,7 +53,7 @@ const productController = {
     products[index] = updatedProduct
     res.status(200).json('Product updated')
   },
-  delete: (req, res) => {
+  deleteProduct: (req, res) => {
     const id = Number(req.params.id)
     const index = products.findIndex(product => product.id === id)
     if (index === -1) {

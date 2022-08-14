@@ -35,7 +35,7 @@ const categoryController = {
       .catch(err => res.send(err)
       )
   },
-  insert: (req, res, next) => {
+  insertCategory: (req, res, next) => {
     const { id, name } = req.body
     categoryModel.insert(id, name)
       .then(
@@ -44,7 +44,7 @@ const categoryController = {
       .catch(err => res.send(err)
       )
   },
-  update: (req, res, next) => {
+  updateCategory: (req, res, next) => {
     const id = Number(req.params.id)
     const name = req.body.name
     categoryModel.update(id, name)
@@ -54,7 +54,7 @@ const categoryController = {
       .catch(err => res.send(err)
       )
   },
-  delete: (req, res, next) => {
+  deleteCategory: (req, res, next) => {
     const id = Number(req.params.id)
     categoryModel.deleteCategory(id)
       .then(
