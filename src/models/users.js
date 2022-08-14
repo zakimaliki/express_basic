@@ -11,9 +11,9 @@ const findEmail = (email) =>{
     )
 }
 const create = (data)=>{
-const {id,email,passwordHash,fullname}= data
+const {id,email,passwordHash,fullname,role}= data
     return  new Promise ((resolve,reject)=> 
-    Pool.query(`INSERT INTO users(id, email,password,fullname) VALUES('${id}','${email}','${passwordHash}','${fullname}')`,(error,result)=>{
+    Pool.query(`INSERT INTO users(id, email,password,fullname,role) VALUES('${id}','${email}','${passwordHash}','${fullname}','${role}')`,(error,result)=>{
       if(!error){
         resolve(result)
       }else{

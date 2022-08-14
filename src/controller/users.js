@@ -4,7 +4,8 @@ const createError = require('http-errors')
 // const jwt = require('jsonwebtoken')
 const {findEmail,create} = require('../models/users')
 const commonHelper = require('../helper/common');
-const authHelper = require('../helper/auth')
+const authHelper = require('../helper/auth');
+const { use } = require('../routes/users');
 
 const UserController ={
  register : async(req,res,next)=>{
@@ -21,7 +22,8 @@ const UserController ={
         id:uuidv4(),
         email,
         passwordHash,
-        fullname
+        fullname,
+        role :'user'
       }
       create(data)      
       .then(
@@ -33,7 +35,7 @@ const UserController ={
       console.log(error);
     }
   },
-login :async(req,res,next)=>{
+ login :async(req,res,next)=>{
     try{
       const {email,password} = req.body
       const {rows : [user]} = await findEmail(email)
@@ -48,15 +50,21 @@ login :async(req,res,next)=>{
         }
         delete user.password
         const payload = {
-          data: user.email,
-          role : '1'
+          email: user.email,
+          role : user.role
         }
         user.token = authHelper.generateToken(payload)
         commonHelper.response(res,user,201,'login is successful')
     }catch(error){
       console.log(error);
     }
-  }
+  },
+ profile :async(req,res,next)=>{
+  const email = req.payload.email
+  const {rows:[user]} = await findEmail(email)
+  delete user.password
+  commonHelper.response(res,user,200)
+ }
 }
 
 

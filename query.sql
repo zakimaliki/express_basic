@@ -34,7 +34,8 @@ CREATE TABLE users(
     id VARCHAR PRIMARY KEY,
     email VARCHAR NOT NULL,
     password VARCHAR NOT NULL,
-    fullname VARCHAR
+    fullname VARCHAR,
+    role VARCHAR
 );
 
 DROP TABLE product CASCADE;
@@ -57,3 +58,5 @@ INSERT INTO category(name) VALUES('kursi');
 UPDATE category SET name ='furniture' WHERE id=1;
 
 DELETE FROM category WHERE id=1;
+
+ALTER TABLE users ADD role VARCHAR;
