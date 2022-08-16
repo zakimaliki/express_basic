@@ -1,6 +1,7 @@
 const createError = require('http-errors')
 const {selectAll,select,countData,findId,insert,update,deleteData} = require('../models/products')
 const commonHelper = require('../helper/common')
+const client = require('../config/redis')
 
 
 const productController = {
@@ -30,7 +31,10 @@ const productController = {
     const id = Number(req.params.id)
     select(id)
       .then(
-        result => commonHelper.response(res, result.rows, 200, "get data success")
+        result => {
+        client.setEx(`product/${id}`,60*60,JSON.stringify(result.rows))
+        commonHelper.response(res, result.rows, 200, "get data success from database")
+        }
       )
       .catch(err => res.send(err)
       )

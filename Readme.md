@@ -13,6 +13,9 @@
 | [Uuid] | npm i uuid |
 | [Jsonwebtoken] | npm i jsonwebtoken |
 | [Multer] | npm i multer |
+| [Node-Redis] | npm i redis |
+
+
 
 
 [express]: <http://expressjs.com>
@@ -27,6 +30,8 @@
 [Uuid]: <https://www.npmjs.com/package/uuid>
 [Jsonwebtoken]: <https://www.npmjs.com/package/jsonwebtoken>
 [Multer]: <https://www.npmjs.com/package/multer>
+[Node-Redis]: <https://www.npmjs.com/package/redis>
+
 
 ## Installation
 

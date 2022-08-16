@@ -16,4 +16,4 @@ const myCors = (req,res,next)=>{
   response.setHeader('Access-Control-Headers', 'Content-Type');
 }
 
-module.exports = validate
+module.exports = {validate,myCors}

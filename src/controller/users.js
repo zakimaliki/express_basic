@@ -1,11 +1,10 @@
 const { v4: uuidv4 } = require('uuid');
 const bcrypt = require('bcryptjs');
 const createError = require('http-errors')
-// const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken')
 const {findEmail,create} = require('../models/users')
 const commonHelper = require('../helper/common');
 const authHelper = require('../helper/auth');
-const { use } = require('../routes/users');
 
 const UserController ={
  register : async(req,res,next)=>{
@@ -54,6 +53,8 @@ const UserController ={
           role : user.role
         }
         user.token = authHelper.generateToken(payload)
+        user.refreshToken = authHelper.generateRefershToken(payload)
+
         commonHelper.response(res,user,201,'login is successful')
     }catch(error){
       console.log(error);
@@ -64,7 +65,21 @@ const UserController ={
   const {rows:[user]} = await findEmail(email)
   delete user.password
   commonHelper.response(res,user,200)
- }
+ },
+ refreshToken : (req,res)=>{
+  const refershToken = req.body.refershToken
+  const decoded = jwt.verify(refershToken, process.env.SECRETE_KEY_JWT)
+  const payload ={
+    email : decoded.email,
+    role : decoded.role
+  }
+  const result ={
+    token : authHelper.generateToken(payload),
+    refershToken : authHelper.generateRefershToken(payload)
+  }
+  commonHelper.response(res,result,200)
+
+}
 }
 
 
