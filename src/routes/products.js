@@ -10,7 +10,7 @@ router
   .get('/', protect, getAllProduct)
   .get('/:id', protect, hitCacheProductDetail, getProduct)
   .post('/', protect,upload.single('photo'), insertProduct)
-  .put('/:id', protect, clearCacheProductDetail,upload.single('photo'), updateProduct)
+  .put('/:id', protect, clearCacheProductDetail, upload.single('photo'), updateProduct)
   .delete('/:id', protect, clearCacheProductDetail, deleteProduct)
 
 module.exports = router
